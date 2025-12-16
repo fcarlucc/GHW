@@ -66,7 +66,14 @@ This entire application was built using GitHub Copilot prompts. Here's an exampl
 - ✅ **Date picker integration** — Added native HTML5 date input in header for quick navigation
 - ✅ **Form validation** — Required field validation with error messages
 - ✅ **Responsive behavior** — Adapted grid and card sizing for mobile devices
-and time-grid logic
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── App.tsx              # Main app with date navigation and time-grid logic
 ├── App.css              # Full-page agenda layout with ruled lines
 ├── index.css            # CSS variables and global styles
 ├── types.ts             # TypeScript types, category colors, constants
@@ -74,27 +81,20 @@ and time-grid logic
     ├── AgendaHeader.tsx # Header with date picker, day display, and + button
     ├── TaskCard.tsx     # Colored task card with time-based positioning
     ├── TaskForm.tsx     # Modal form for creating/editing tasks
-    └── AppFooter.tsx    # Footer with branding and linon logic
-├── App.css              # Modern agenda-inspired styles
-├── index.css            # CSS variables and global styles
-├── types.ts             # TypeScript types, category colors, Italian labels
-└── components/
-    ├── AgendaHeader.tsx # Day/month display with navigation arrows
-    Paper Agenda Aesthetic**: Full-page layout with horizontal yellow ruled lines (#fff9e6 background)
+    └── AppFooter.tsx    # Footer with branding and links
+```
+
+---
+
+## 🎨 Design Highlights
+
+- **Paper Agenda Aesthetic**: Full-page layout with horizontal yellow ruled lines (#fff9e6 background)
 - **Fixed Header**: Clean white header with date picker, weekday/date display, and floating "+" button
 - **Time Grid**: Tasks automatically position themselves based on their time (08:00 - 21:00 range)
 - **Color-Coded Cards**: Each category has a unique color scheme (border, background, badge)
 - **Click-to-Edit**: Intuitive interaction — click any task to open edit modal
 - **Smooth Animations**: Modal slide-up, card hover effects, and button transitions
 - **Professional Footer**: Fixed bottom footer with copyright and GitHub link
-
-## 🎨 Design Highlights
-
-- **Header**: Gradient purple/indigo with large day number (physical agenda style)
-- **Task Cards**: Soft colored background with left border accent
-- **Categories**: Each has its own color palette (bg, border, badge)
-- **Form**: Animated modal with category grid and priority buttons
-- **Transitions**: Smooth hover effects and micro-animations
 
 ---
 
