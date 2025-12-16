@@ -1,0 +1,584 @@
+/* ============================================================
+   FULL-PAGE AGENDA APP
+   Layout inspired by a paper agenda with yellow horizontal lines
+   ============================================================ */
+
+.agenda-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   HEADER - Fixed at top
+   ============================================================ */
+.app-header {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.header-date {
+  flex: 1;
+}
+
+.header-day-name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.header-date-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.header-day-number {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.header-month-year {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-month {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.header-year {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-date-picker {
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 150ms ease;
+  backdrop-filter: blur(8px);
+}
+
+.header-date-picker::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.header-date-picker:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.header-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: white;
+  color: var(--color-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header-add-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   BODY - Paper agenda with yellow lines
+   ============================================================ */
+.agenda-body {
+  flex: 1;
+  background: var(--color-bg-card);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 39px,
+    var(--color-line-yellow) 39px,
+    var(--color-line-yellow) 40px
+  );
+  background-size: 100% 40px;
+  padding: 2rem;
+}
+
+.agenda-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.agenda-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.agenda-empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  filter: grayscale(0.3);
+}
+
+.agenda-empty-text {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.agenda-empty-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   TASK CARD
+   ============================================================ */
+.task-card {
+  position: relative;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border-left: 4px solid;
+  box-shadow: var(--shadow-sm);
+  transition: all 180ms ease;
+  cursor: pointer;
+}
+
+.task-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.task-card--completed {
+  opacity: 0.65;
+}
+
+.task-card--completed .task-card-title,
+.task-card--completed .task-card-description {
+  text-decoration: line-through;
+}
+
+.task-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.task-card-badge {
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.task-card-time {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.task-card-priority {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.task-card-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.task-card-checkbox-wrapper {
+  padding-top: 0.15rem;
+}
+
+.task-card-checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.task-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  word-break: break-word;
+}
+
+.task-card-description {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  word-break: break-word;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.app-footer {
+  background: #1e293b;
+  color: #cbd5e1;
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid #334155;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-text {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.footer-copy {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+/* ============================================================
+   TASK FORM MODAL
+   ============================================================ */
+.task-form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+  animation: fadeIn 200ms ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.task-form-modal {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 250ms ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.task-form-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.task-form-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #f1f5f9;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms ease;
+}
+
+.task-form-close:hover {
+  background: #e2e8f0;
+  color: var(--color-text);
+}
+
+.task-form-body {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.task-form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-border-subtle);
+  background: #f8fafc;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.task-form-footer-right {
+  display: flex;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group--half {
+  flex: 1;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.form-label--required::after {
+  content: ' *';
+  color: var(--color-danger);
+}
+
+.form-optional {
+  font-weight: 400;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border-strong);
+  background: #f8fafc;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  transition: all 150ms ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: white;
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+.form-input--error {
+  border-color: var(--color-danger);
+}
+
+.form-input--error:focus {
+  box-shadow: 0 0 0 3px var(--color-danger-soft);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+.form-error {
+  font-size: 0.82rem;
+  color: var(--color-danger);
+  margin-top: 0.15rem;
+}
+
+.form-category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.form-category-btn {
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.form-category-btn:hover {
+  transform: translateY(-1px);
+}
+
+.form-category-btn--selected {
+  box-shadow: var(--shadow-sm);
+}
+
+.form-priority-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.form-priority-btn {
+  flex: 1;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.form-priority-btn:hover {
+  transform: translateY(-1px);
+}
+
+.form-btn {
+  padding: 0.7rem 1.3rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.form-btn--primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+}
+
+.form-btn--primary:hover {
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+  transform: translateY(-1px);
+}
+
+.form-btn--secondary {
+  background: #e2e8f0;
+  color: var(--color-text-secondary);
+}
+
+.form-btn--secondary:hover {
+  background: #cbd5e1;
+}
+
+.form-btn--danger {
+  background: var(--color-danger);
+  color: white;
+}
+
+.form-btn--danger:hover {
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .header-add-btn span {
+    display: none;
+  }
+
+  .agenda-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+}
